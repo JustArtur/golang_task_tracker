@@ -1,5 +1,5 @@
 .idea
 /tmp
-/app/.env.docker
-/app/.env.dev
+/.env.docker
+/.env.dev
 
