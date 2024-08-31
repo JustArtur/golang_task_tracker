@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/gorilla/mux"
 	"golang_task_tracker/app/controllers"
+	"golang_task_tracker/app/services/auth"
 	"log"
 	"net/http"
 )
@@ -20,11 +21,11 @@ func RunServer() {
 func newRoute() *mux.Router {
 	router := mux.NewRouter()
 
-	router.HandleFunc("/login", controllers.HandleLogin).Methods("POST")
-	router.HandleFunc("/register", controllers.HandleRegister).Methods("POST")
+	router.HandleFunc("/login", controllers.Login).Methods("POST")
+	router.HandleFunc("/register", controllers.Register).Methods("POST")
 
 	apiRouter := router.PathPrefix("/api/v1").Subrouter()
+	apiRouter.Use(auth.JWTMiddleware)
 
-	apiRouter.Use()
 	return router
 }

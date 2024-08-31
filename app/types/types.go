@@ -12,3 +12,15 @@ type User struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+type NotePayload struct {
+	Title string `json:"title"`
+	Body  string `json:"body"`
+}
+
+type Note struct {
+	ID     int    `json:"id"`
+	UserID int    `json:"user_id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
+}

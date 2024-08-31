@@ -12,12 +12,11 @@ import (
 
 var user types.UserPayload
 
-func HandleLogin(w http.ResponseWriter, r *http.Request) {
+func Login(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Started %s %s", r.Method, r.RequestURI)
 	defer log.Printf("Completed %s %s", r.Method, r.RequestURI)
 
 	err := ParseRequest(r, &user)
-
 	if err != nil {
 		log.Println(err)
 		SendErrorResponse(w, http.StatusBadRequest, err)
@@ -47,7 +46,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 	SendResponse(w, http.StatusOK, map[string]string{"access_token": token})
 }
 
-func HandleRegister(w http.ResponseWriter, r *http.Request) {
+func Register(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Started %s %s", r.Method, r.RequestURI)
 	defer log.Printf("Completed %s %s", r.Method, r.RequestURI)
 

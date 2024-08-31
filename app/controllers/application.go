@@ -19,3 +19,7 @@ func SendResponse(w http.ResponseWriter, status int, payload any) {
 func SendErrorResponse(w http.ResponseWriter, status int, error error) {
 	SendResponse(w, status, map[string]string{"error": error.Error()})
 }
+
+func GetTokenFromRequest(r *http.Request) string {
+	return r.Header.Get("Authorization")
+}

@@ -37,6 +37,36 @@ func GetUserByEmail(email string) (*types.User, error) {
 	return user, nil
 }
 
+func GetUserByID(ID int) (*types.User, error) {
+	user := new(types.User)
+
+	query := "SELECT * FROM users WHERE \"id\" = $1"
+
+	log.Print("pq: ", query, ID)
+	rows, err := db.Db.Query(query, ID)
+	if err != nil {
+		return nil, err
+	}
+
+	for rows.Next() {
+		err = rows.Scan(
+			&user.ID,
+			&user.Name,
+			&user.Email,
+			&user.Password,
+		)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	if user.ID == 0 {
+		return nil, fmt.Errorf("user not found")
+	}
+
+	return user, nil
+}
+
 func CreateUser(user types.User) error {
 
 	query := "INSERT INTO users (name, email, password) VALUES ($1, $2, $3)"
