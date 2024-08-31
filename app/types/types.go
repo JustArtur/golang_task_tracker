@@ -1,17 +1,14 @@
 package types
 
-type UserLogin struct {
+type UserPayload struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-}
-
-type UserRegistration struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Name     string
 }
 
 type User struct {
-	ID       int
-	Email    string
-	Password string
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

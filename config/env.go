@@ -26,7 +26,7 @@ func InitEnvs() {
 		env = "dev"
 	}
 
-	err := godotenv.Load("../.env." + env)
+	err := godotenv.Load(".env." + env)
 
 	if err != nil {
 		log.Fatal(err)
@@ -40,7 +40,7 @@ func InitEnvs() {
 func loadEnvs() Config {
 	return Config{
 		JWTSecret:     os.Getenv("JWT_SECRET"),
-		JWTExpiration: getAsInt(os.Getenv("JWT_EXPIRATION")),
+		JWTExpiration: getAsInt("JWT_EXPIRATION"),
 		DbName:        os.Getenv("DB_NAME"),
 		DbHost:        os.Getenv("DB_HOST"),
 		DbPort:        os.Getenv("DB_PORT"),

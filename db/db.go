@@ -10,14 +10,14 @@ import (
 
 var Db *sql.DB
 
-func ConnectToDB() *sql.DB {
+func ConnectToDB() {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		config.Envs.DbHost, config.Envs.DbPort, config.Envs.DbUser, config.Envs.DbPass, config.Envs.DbName, config.Envs.DbSSLMode)
 
 	db, err := sql.Open("postgres", connStr)
 
 	if err != nil {
-		log.Fatalf(err.Error())
+		log.Fatal(err.Error())
 	}
 
 	err = db.Ping()
@@ -26,7 +26,13 @@ func ConnectToDB() *sql.DB {
 		log.Fatal(err)
 	}
 
-	log.Println("DataBase Successfully connected!")
+	Db = db
 
-	return db
+	var dbName string
+	err = db.QueryRow("SELECT current_database()").Scan(&dbName)
+	if err != nil {
+		log.Fatal("Error querying current database name: ", err)
+	}
+
+	log.Println("Successfully connected to database: ", dbName)
 }
