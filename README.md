@@ -1,34 +1,3 @@
-## Запуск локально
-
-### Создать и наполнить `.env.dev`
-```bash
-touch task_tracker_app/.env.dev
-```
-#### Пример данных
-
-```
-DB_NAME=golang_task_tracker
-DB_HOST=localhost
-DB_PORT=5432
-DB_SSL_MODE=disable
-DB_USER=example_user
-DB_PASS=example_pass
-JWT_EXPIRATION=600
-YANDEX_SPELLER_URL=https://speller.yandex.net/services/spellservice.json/checkText
-```
-
-### Прогоняем миграции
-```bash
-make migrate_up
-```
-
-### Запуск локального сервера
-```bash
-cd task_tracker_app
-go install github.com/zzwx/fresh@latest
-fresh
-```
-
 ## Запуск в докере
 
 ### Создать `.env.docker`
@@ -64,5 +33,5 @@ docker-compose up --build
 
 ### Прогоняем миграции
 ```bash
-make docker_migrate_up
+make ENV=docker docker_migrate_up
 ```
