@@ -24,6 +24,7 @@ make migrate_up
 
 ### Запуск локального сервера
 ```bash
+cd task_tracker_app
 go install github.com/zzwx/fresh@latest
 fresh
 ```
