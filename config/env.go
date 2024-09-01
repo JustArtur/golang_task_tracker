@@ -8,14 +8,15 @@ import (
 )
 
 type Config struct {
-	JWTSecret     string
-	JWTExpiration int64
-	DbName        string
-	DbHost        string
-	DbPort        string
-	DbUser        string
-	DbPass        string
-	DbSSLMode     string
+	JWTSecret      string
+	JWTExpiration  int64
+	DbName         string
+	DbHost         string
+	DbPort         string
+	DbUser         string
+	DbPass         string
+	DbSSLMode      string
+	YNDXSpellerURL string
 }
 
 var Envs Config
@@ -39,14 +40,15 @@ func InitEnvs() {
 
 func loadEnvs() Config {
 	return Config{
-		JWTSecret:     os.Getenv("JWT_SECRET"),
-		JWTExpiration: getAsInt("JWT_EXPIRATION"),
-		DbName:        os.Getenv("DB_NAME"),
-		DbHost:        os.Getenv("DB_HOST"),
-		DbPort:        os.Getenv("DB_PORT"),
-		DbUser:        os.Getenv("DB_USER"),
-		DbPass:        os.Getenv("DB_PASS"),
-		DbSSLMode:     os.Getenv("DB_SSL_MODE"),
+		JWTSecret:      os.Getenv("JWT_SECRET"),
+		JWTExpiration:  getAsInt("JWT_EXPIRATION"),
+		DbName:         os.Getenv("DB_NAME"),
+		DbHost:         os.Getenv("DB_HOST"),
+		DbPort:         os.Getenv("DB_PORT"),
+		DbUser:         os.Getenv("DB_USER"),
+		DbPass:         os.Getenv("DB_PASS"),
+		DbSSLMode:      os.Getenv("DB_SSL_MODE"),
+		YNDXSpellerURL: os.Getenv("YANDEX_SPELLER_URL"),
 	}
 }
 

@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"fmt"
 	"golang_task_tracker/app/helpers"
 	"golang_task_tracker/app/models"
+	"golang_task_tracker/app/services/notes"
 	"golang_task_tracker/app/types"
 	"log"
 	"net/http"
@@ -23,6 +23,8 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		helpers.SendErrorResponse(w, http.StatusBadRequest, err)
 		return
 	}
+
+	notes.Correct(&note)
 
 	noteRecord, err := models.CreateNote(&note)
 	if err != nil {
@@ -45,6 +47,5 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(notes)
 	helpers.SendResponse(w, http.StatusOK, notes)
 }
