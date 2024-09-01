@@ -1,8 +1,6 @@
 package notes
 
 import (
-	"app/app/types"
-	"app/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -10,6 +8,8 @@ import (
 	"log"
 	"mime/multipart"
 	"net/http"
+	"task_tracker_app/app/types"
+	"task_tracker_app/config"
 )
 
 type SpellerResponse struct {

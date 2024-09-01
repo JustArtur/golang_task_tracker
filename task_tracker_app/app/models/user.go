@@ -1,10 +1,10 @@
 package models
 
 import (
-	"app/app/types"
-	"app/db"
 	"fmt"
 	"log"
+	"task_tracker_app/app/types"
+	"task_tracker_app/db"
 )
 
 func GetUserByEmail(email string) (*types.User, error) {

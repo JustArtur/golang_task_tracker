@@ -1,0 +1,82 @@
+swagger: '2.0'
+info:
+  title: Task Tracker API
+  version: 1.0.0
+  description: API documentation for Task Tracker application
+
+basePath: localhost:8000
+paths:
+  /login:
+    post:
+      summary: Login
+      description: Logs in a user with email and password
+      parameters:
+        - in: body
+          name: user
+          description: User credentials
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: Successful login
+        '400':
+          description: Invalid credentials
+
+  /register:
+    post:
+      summary: Register
+      description: Registers a new user
+      parameters:
+        - in: body
+          name: user
+          description: User registration details
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+              name:
+                type: string
+      responses:
+        '201':
+          description: User registered
+        '400':
+          description: Invalid input
+
+  /api/v1/notes:
+    post:
+      summary: Create Note
+      description: Creates a new note for a user
+      parameters:
+        - in: body
+          name: note
+          description: Note details
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+              title:
+                type: string
+              body:
+                type: string
+      responses:
+        '201':
+          description: Note created
+        '400':
+          description: Invalid input
+
+    get:
+      summary: Get Notes
+      description: Retrieves all notes
+      responses:
+        '200':
+          description: List of notes
+

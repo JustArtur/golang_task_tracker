@@ -1,14 +1,14 @@
 package controllers
 
 import (
-	"app/app/helpers"
-	"app/app/models"
-	"app/app/services/auth"
-	"app/app/types"
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
+	"task_tracker_app/app/helpers"
+	"task_tracker_app/app/models"
+	"task_tracker_app/app/services/auth"
+	"task_tracker_app/app/types"
 )
 
 var user types.UserPayload

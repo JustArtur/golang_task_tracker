@@ -1,15 +1,15 @@
 package auth
 
 import (
-	"app/app/helpers"
-	"app/app/models"
-	"app/config"
 	"context"
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
 	"log"
 	"net/http"
 	"strconv"
+	"task_tracker_app/app/helpers"
+	"task_tracker_app/app/models"
+	"task_tracker_app/config"
 	"time"
 )
 

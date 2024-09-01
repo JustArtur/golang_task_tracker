@@ -1,11 +1,12 @@
 package api
 
 import (
-	"app/app/controllers"
-	"app/app/services/auth"
 	"github.com/gorilla/mux"
+	"github.com/swaggo/http-swagger"
 	"log"
 	"net/http"
+	"task_tracker_app/app/controllers"
+	"task_tracker_app/app/services/auth"
 )
 
 func RunServer() {
@@ -20,6 +21,8 @@ func RunServer() {
 
 func newRoute() *mux.Router {
 	router := mux.NewRouter()
+
+	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	router.HandleFunc("/login", controllers.Login).Methods("POST")
 	router.HandleFunc("/register", controllers.Register).Methods("POST")

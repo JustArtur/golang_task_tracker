@@ -1,9 +1,9 @@
 package main
 
 import (
-	"app/app/api"
-	"app/config"
-	"app/db"
+	"task_tracker_app/app/api"
+	"task_tracker_app/config"
+	"task_tracker_app/db"
 )
 
 func init() {

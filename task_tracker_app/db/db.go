@@ -1,11 +1,11 @@
 package db
 
 import (
-	"app/config"
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
 	"log"
+	"task_tracker_app/config"
 )
 
 var Db *sql.DB
@@ -14,7 +14,6 @@ func ConnectToDB() {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		config.Envs.DbHost, config.Envs.DbPort, config.Envs.DbUser, config.Envs.DbPass, config.Envs.DbName, config.Envs.DbSSLMode)
 
-	fmt.Println(connStr)
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatalf("database connect failed: %v", err.Error())

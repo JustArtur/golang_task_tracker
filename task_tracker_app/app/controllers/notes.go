@@ -1,12 +1,12 @@
 package controllers
 
 import (
-	"app/app/helpers"
-	"app/app/models"
-	"app/app/services/notes"
-	"app/app/types"
 	"log"
 	"net/http"
+	"task_tracker_app/app/helpers"
+	"task_tracker_app/app/models"
+	"task_tracker_app/app/services/notes"
+	"task_tracker_app/app/types"
 )
 
 var note types.NotePayload
