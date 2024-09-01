@@ -14,8 +14,9 @@ type User struct {
 }
 
 type NotePayload struct {
-	Title string `json:"title"`
-	Body  string `json:"body"`
+	UserID int    `json:"user_id"`
+	Title  string `json:"title"`
+	Body   string `json:"body"`
 }
 
 type Note struct {

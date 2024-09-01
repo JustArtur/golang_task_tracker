@@ -1,33 +1,50 @@
 package controllers
 
 import (
+	"fmt"
+	"golang_task_tracker/app/helpers"
+	"golang_task_tracker/app/models"
 	"golang_task_tracker/app/types"
 	"log"
 	"net/http"
 )
 
-var note types.UserPayload
+var note types.NotePayload
 
 func Create(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Started %s %s", r.Method, r.RequestURI)
 	defer log.Printf("Completed %s %s", r.Method, r.RequestURI)
 
-	err := ParseRequest(r, &note)
+	note.UserID = helpers.GetUserIDFromContext(r)
+
+	err := helpers.ParseRequest(r, &note)
 	if err != nil {
 		log.Println(err)
-		SendErrorResponse(w, http.StatusBadRequest, err)
+		helpers.SendErrorResponse(w, http.StatusBadRequest, err)
 		return
 	}
+
+	noteRecord, err := models.CreateNote(&note)
+	if err != nil {
+		log.Println(err)
+		helpers.SendErrorResponse(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	helpers.SendResponse(w, http.StatusCreated, noteRecord)
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Started %s %s", r.Method, r.RequestURI)
 	defer log.Printf("Completed %s %s", r.Method, r.RequestURI)
 
-	err := ParseRequest(r, &note)
+	notes, err := models.GetAllUserNotes(helpers.GetUserIDFromContext(r))
 	if err != nil {
-		log.Println(err)
-		SendErrorResponse(w, http.StatusBadRequest, err)
+		log.Printf("failed to get notes from DB %v", err)
+		helpers.SendErrorResponse(w, http.StatusInternalServerError, err)
 		return
 	}
+
+	fmt.Println(notes)
+	helpers.SendResponse(w, http.StatusOK, notes)
 }

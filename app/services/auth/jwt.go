@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/golang-jwt/jwt/v5"
-	"golang_task_tracker/app/controllers"
+	"golang_task_tracker/app/helpers"
 	"golang_task_tracker/app/models"
 	"golang_task_tracker/config"
 	"log"
@@ -14,9 +14,9 @@ import (
 )
 
 func NewJWT(userID int) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"subject":   strconv.Itoa(userID),
-		"expiresAt": time.Now().Add(time.Second * time.Duration(config.Envs.JWTExpiration)).Unix(),
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.RegisteredClaims{
+		Subject:   strconv.Itoa(userID),
+		ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Second * time.Duration(config.Envs.JWTExpiration))),
 	})
 
 	signedToken, err := token.SignedString([]byte(config.Envs.JWTSecret))
@@ -30,13 +30,13 @@ func NewJWT(userID int) (string, error) {
 	return signedToken, nil
 }
 
-func JWTMiddleware(next http.Handler) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		tokenStr := controllers.GetTokenFromRequest(r)
+func JWTMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		tokenStr := helpers.GetTokenFromRequest(r)
 
 		token, err := validateJWT(tokenStr)
 		if err != nil {
-			log.Println("validate token error")
+			log.Printf("validate token error: %v", err)
 			unauthorized(w)
 			return
 		}
@@ -56,10 +56,9 @@ func JWTMiddleware(next http.Handler) http.HandlerFunc {
 		}
 
 		ctx := context.WithValue(r.Context(), "userID", u.ID)
-		r = r.WithContext(ctx)
 
-		next.ServeHTTP(w, r)
-	}
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
 }
 
 func validateJWT(token string) (*jwt.Token, error) {
@@ -90,5 +89,5 @@ func getUserIDFromJWT(token *jwt.Token) (int, error) {
 }
 
 func unauthorized(w http.ResponseWriter) {
-	controllers.SendErrorResponse(w, http.StatusUnauthorized, fmt.Errorf("unauthorized"))
+	helpers.SendErrorResponse(w, http.StatusUnauthorized, fmt.Errorf("unauthorized"))
 }

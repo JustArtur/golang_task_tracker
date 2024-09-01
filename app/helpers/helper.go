@@ -1,4 +1,4 @@
-package controllers
+package helpers
 
 import (
 	"encoding/json"
@@ -22,4 +22,8 @@ func SendErrorResponse(w http.ResponseWriter, status int, error error) {
 
 func GetTokenFromRequest(r *http.Request) string {
 	return r.Header.Get("Authorization")
+}
+
+func GetUserIDFromContext(r *http.Request) int {
+	return r.Context().Value("userID").(int)
 }

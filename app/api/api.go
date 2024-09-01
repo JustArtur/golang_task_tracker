@@ -26,6 +26,8 @@ func newRoute() *mux.Router {
 
 	apiRouter := router.PathPrefix("/api/v1").Subrouter()
 	apiRouter.Use(auth.JWTMiddleware)
+	apiRouter.HandleFunc("/notes", controllers.Create).Methods("POST")
+	apiRouter.HandleFunc("/notes", controllers.Index).Methods("GET")
 
 	return router
 }
