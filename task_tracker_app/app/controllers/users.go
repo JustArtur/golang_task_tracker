@@ -1,12 +1,12 @@
 package controllers
 
 import (
+	"app/app/helpers"
+	"app/app/models"
+	"app/app/services/auth"
+	"app/app/types"
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
-	"golang_task_tracker/app/helpers"
-	"golang_task_tracker/app/models"
-	"golang_task_tracker/app/services/auth"
-	"golang_task_tracker/app/types"
 	"log"
 	"net/http"
 )

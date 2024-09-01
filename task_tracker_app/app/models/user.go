@@ -1,9 +1,9 @@
 package models
 
 import (
+	"app/app/types"
+	"app/db"
 	"fmt"
-	"golang_task_tracker/app/types"
-	"golang_task_tracker/db"
 	"log"
 )
 

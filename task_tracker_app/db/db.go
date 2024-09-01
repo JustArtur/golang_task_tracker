@@ -1,10 +1,10 @@
 package db
 
 import (
+	"app/config"
 	"database/sql"
 	"fmt"
 	_ "github.com/lib/pq"
-	"golang_task_tracker/config"
 	"log"
 )
 
@@ -14,16 +14,15 @@ func ConnectToDB() {
 	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		config.Envs.DbHost, config.Envs.DbPort, config.Envs.DbUser, config.Envs.DbPass, config.Envs.DbName, config.Envs.DbSSLMode)
 
+	fmt.Println(connStr)
 	db, err := sql.Open("postgres", connStr)
-
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatalf("database connect failed: %v", err.Error())
 	}
 
 	err = db.Ping()
-
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("database ping failed: %v", err)
 	}
 
 	Db = db

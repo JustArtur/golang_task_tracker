@@ -1,1 +1,6 @@
-/.env.dev
+/task_tracker_app/.env.dev
+.idea
+.DS_Store
+/tmp
+.gitignore
+README.md

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"golang_task_tracker/app/api"
-	"golang_task_tracker/config"
-	"golang_task_tracker/db"
+	"app/app/api"
+	"app/config"
+	"app/db"
 )
 
 func init() {

@@ -32,7 +32,7 @@ func InitEnvs() {
 	if err != nil {
 		log.Fatal(err)
 	} else {
-		log.Println("env: load env success")
+		log.Printf("env: succesfull loaded file: %s", ".env."+env)
 	}
 
 	Envs = loadEnvs()

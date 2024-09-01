@@ -1,9 +1,9 @@
 package api
 
 import (
+	"app/app/controllers"
+	"app/app/services/auth"
 	"github.com/gorilla/mux"
-	"golang_task_tracker/app/controllers"
-	"golang_task_tracker/app/services/auth"
 	"log"
 	"net/http"
 )

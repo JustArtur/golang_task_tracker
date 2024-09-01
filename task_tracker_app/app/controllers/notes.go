@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"golang_task_tracker/app/helpers"
-	"golang_task_tracker/app/models"
-	"golang_task_tracker/app/services/notes"
-	"golang_task_tracker/app/types"
+	"app/app/helpers"
+	"app/app/models"
+	"app/app/services/notes"
+	"app/app/types"
 	"log"
 	"net/http"
 )

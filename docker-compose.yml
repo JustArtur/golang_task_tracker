@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - task_tracker_app/.env.docker
+    ports:
+      - "5432"
+
+  migrate:
+    image: migrate/migrate:v4.15.2
+    profiles: [ "tools" ]
+    volumes:
+      - ./task_tracker_app/db/migrate:/task_tracker_app/db/migrate
+    entrypoint: [
+      "migrate",
+      "-path",
+      "/task_tracker_app/db/migrate",
+      "-database",
+      "${DB_URL}"
+    ]
+    command: [ "up" ]
+    env_file:
+      - task_tracker_app/.env.docker
+    depends_on:
+      - db
+    restart: on-failure
+
+  golang_task_tracker:
+    build: task_tracker_app
+    restart: always
+    env_file:
+      - task_tracker_app/.env.docker
+    environment:
+      ENV: docker
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

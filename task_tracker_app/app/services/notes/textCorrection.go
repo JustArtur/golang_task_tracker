@@ -1,11 +1,11 @@
 package notes
 
 import (
+	"app/app/types"
+	"app/config"
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"golang_task_tracker/app/types"
-	"golang_task_tracker/config"
 	"io"
 	"log"
 	"mime/multipart"
